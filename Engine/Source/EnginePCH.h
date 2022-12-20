@@ -10,7 +10,9 @@
 
 
 // Direct3D
+#ifdef FE_PLATFORM_WINDOWS
 #include <d3d11.h>
+#endif
 
 
 
