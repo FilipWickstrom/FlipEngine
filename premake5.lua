@@ -53,16 +53,16 @@ project "Engine"
 		staticruntime "On"
 		systemversion "latest"
 
-		links
-		{
-			"d3d11"
-		}
-
 		defines
 		{
 			"GLFW_INCLUDE_NONE",
 			"FE_PLATFORM_WINDOWS",
 			"FE_BUILD_STATIC"
+		}
+		
+		links
+		{
+			"d3d11"
 		}
 
 		postbuildcommands
@@ -119,8 +119,6 @@ project "Sandbox"
 	
 	links
 	{
-		"dl",
-		"pthread",
 		"Engine",
 		"GLFW"
 	}
@@ -150,6 +148,12 @@ project "Sandbox"
 		{
 			"FE_PLATFORM_LINUX",
 			"_X11"
+		}
+		
+		links
+		{
+			"dl",
+			"pthread"
 		}
 
 	filter "configurations:Debug"
