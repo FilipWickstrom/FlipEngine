@@ -1,3 +1,0 @@
-[submodule "Engine/Dependency/GLFW"]
-	path = Engine/Dependency/GLFW
-	url = https://github.com/FilipWickstrom/glfw.git
