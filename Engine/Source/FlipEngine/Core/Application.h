@@ -1,5 +1,5 @@
 #pragma once
-#include "Window.h"		//#include "Flip/Core/Window.h"
+#include "Window.h"
 
 namespace Flip
 {
@@ -15,26 +15,31 @@ namespace Flip
 	class Application
 	{
 	public:
-		Application(GraphicsAPI api);
-		~Application();
+		Application(const std::string& nameOfApp);
+		~Application() = default;
 
 		// Should not be possible to copy or assign.
 		Application(const Application&) = delete;
 		Application& operator=(const Application&) = delete;
 
-		// One version is to make this a static lib.
-		// Then we can create an application that inherit 
-		// from this. 
-		//https://github.com/Shot511/RapidGL/blob/master/src/core/core_app.h
-		//virtual void Input() = 0;
-		//virtual void Update(double dt) = 0;
-		//virtual void Render() = 0;
-		//virtual void RenderGUI() = 0;
+		// Layout of application inspired by:
+		// https://github.com/Shot511/RapidGL/blob/master/src/core/core_app.h
+		
+		// Setup data specific for this application
+		virtual void Init() = 0;
+		// Clean up data when closing application
+		virtual void Clean() = 0;
+		// Setup how input should be handled
+		virtual void Input() = 0;
+		// Update entities
+		virtual void Update(double dt) = 0;
+		// Render the models
+		virtual void Render() = 0;
+		// Render imGUI stuff
+		virtual void RenderGUI() = 0;
 
-
+		// Start the "endless" loop
 		void Run();
-		// - Read in the scene and all the objects
-		// - Start the loop (update, render...)
 
 	private:
 		// void Update(); // Specific for the application.
@@ -48,11 +53,9 @@ namespace Flip
 
 	private:
 
-		// Window
-		Window m_window;
-		// - Searching for the largest resolution to use at startup.
+		// Handling the surface to draw on.
+		Window m_Window;
 		// - Handling window size and resizing and so on.
-		// 
 
 		// InputHandler
 		// - Handling input

@@ -1,33 +1,31 @@
 #pragma once
-//#include "FlipEngine/EnginePCH.h"
-
 #include <GLFW/glfw3.h>
-
 #include <string>
-
-typedef unsigned int uint;
 
 namespace Flip
 {
 	class Window
 	{
 	public:
-		Window(int width, int height, const std::string& caption = "FlipEngine");	// Change to vec2 later on
+		Window();
 		~Window();
 	
 		// Should not be possible to copy or assign.
 		Window(const Window&) = delete;
 		Window& operator=(const Window&) = delete;
 
+		// Setup the GLFW window
+		bool Initialize();
+
 		// Basic - needed in most cases
 		bool IsOpen();
 		void PollEvent();
 		void Display();
 
-		// Settings
+		// Settings from file
 		void EnableVSync(bool toggle = true);
 		void EnableFullscreen(bool toggle = true);
-		void SetMaxFramerate(uint maxFPS);
+		void SetCaption(const std::string& caption);
 		//void SetClearColor(vec4);
 
 	private:
@@ -35,17 +33,16 @@ namespace Flip
 
 	private:
 		GLFWwindow* m_Window;
+		bool		m_Fullscreen;
+		bool		m_VSync;
+		std::string m_Caption;
 
-		bool m_Fullscreen;
-		bool m_VSync;
-		uint m_MaxFPS;
-
+		// [TODO] Later using a vector2 or something simular
 		struct size
 		{
-			uint width;
-			uint height;
+			int width;
+			int height;
 		} m_Size;
-		std::string m_caption;
 
 	};
 }

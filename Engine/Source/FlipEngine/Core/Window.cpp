@@ -1,41 +1,11 @@
 #include "EnginePCH.h"
 #include "Window.h"
 
-Flip::Window::Window(int width, int height, const std::string& caption)
+Flip::Window::Window()
 {
 	m_Fullscreen	= false;
 	m_VSync			= true;
-	m_MaxFPS		= 0;
-
-	if (!glfwInit())
-	{
-		// [TODO] Log instead later?
-		std::cout << "GLFW: Init failed..." << std::endl;
-		return;
-	}
-
-	// Get the primary monitor and check the properties of it
-	GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
-	const GLFWvidmode* videoMode = glfwGetVideoMode(primaryMonitor);
-
-	m_Size.height	= static_cast<uint>(videoMode->height);
-	m_Size.width	= static_cast<uint>(videoMode->width);
-	m_MaxFPS		= static_cast<uint>(videoMode->refreshRate);
-
-	// Should not scale the window content
-	glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_FALSE);
-	
-	// We dont want GLFW to create a context for us.
-	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-
-	m_Window = glfwCreateWindow
-		(
-			m_Size.width,
-			m_Size.height,
-			caption.c_str(),
-			nullptr,
-			nullptr
-		);
+	m_Caption		= "FlipEngine";
 }
 
 Flip::Window::~Window()
@@ -43,6 +13,84 @@ Flip::Window::~Window()
 	// Destroy the window
 	glfwDestroyWindow(m_Window);
 
-	// Close down GLFW
+	// Cleans up GLFW
 	glfwTerminate();
+}
+
+bool Flip::Window::Initialize()
+{
+	if (!glfwInit())
+	{
+		// [TODO] Log instead later?
+		std::cout << "GLFW: Init failed..." << std::endl;
+		return false;
+	}
+
+	// Get the primary monitor and check the properties of it
+	GLFWmonitor* primaryMonitor		= glfwGetPrimaryMonitor();
+	const GLFWvidmode* videoMode	= glfwGetVideoMode(primaryMonitor);
+
+	m_Size.height	= videoMode->height;
+	m_Size.width	= videoMode->width;
+
+	// Should not scale the window content
+	glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_FALSE);
+
+	// We dont want GLFW to create a context for us.
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+
+	// If have chosen fullscreen, we will send 
+	// in the monitor as well in window creation.
+	GLFWmonitor* fullscreenMonitor = nullptr;
+	if (m_Fullscreen)
+	{
+		fullscreenMonitor = primaryMonitor;
+	}
+
+	m_Window = glfwCreateWindow
+	(
+		m_Size.width,
+		m_Size.height,
+		m_Caption.c_str(),
+		fullscreenMonitor,
+		nullptr
+	);
+	
+
+	if (!m_Window)
+	{
+		// [TODO]
+		std::cout << "GLFW: Failed to create window..." << std::endl;
+		return false;
+	}
+
+	return true;
+}
+
+bool Flip::Window::IsOpen()
+{
+	// Is keept open as long as we have not sent an close event
+	return !glfwWindowShouldClose(m_Window);
+}
+
+void Flip::Window::PollEvent()
+{
+	glfwPollEvents();
+}
+
+void Flip::Window::EnableVSync(bool toggle)
+{
+	m_VSync = toggle;
+}
+
+void Flip::Window::EnableFullscreen(bool toggle)
+{
+	m_Fullscreen = toggle;
+	// [TODO] Some GLFW code to update the window
+}
+
+void Flip::Window::SetCaption(const std::string& caption)
+{
+	m_Caption = caption;
+	glfwSetWindowTitle(m_Window, m_Caption.c_str());
 }
