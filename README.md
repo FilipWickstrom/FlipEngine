@@ -25,5 +25,5 @@ or
 3. Open solution for Visual Studio in main directory.
 
 # Libraries and 3rd-parties
-* [GLFW (3.3)](https://irrlicht.sourceforge.io/) Creates the window and handle input.
-* [spdlog (1.11)](https://github.com/gabime/spdlog) Very fast logging library.
+* [GLFW (3.3.8)](https://github.com/glfw/glfw) Creates the window and handle input.
+* [spdlog (1.11.0)](https://github.com/gabime/spdlog) Very fast logging library.
