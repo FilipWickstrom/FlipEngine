@@ -1,24 +1,24 @@
 #include "EnginePCH.h"
 #include "Timer.h"
 
-Timer::Timer()
+Flip::Timer::Timer()
 {
 	m_IsRunning = false;
 }
 
-void Timer::Start()
+void Flip::Timer::Start()
 {
 	m_IsRunning = true;
 	m_StartTime = std::chrono::high_resolution_clock::now();
 }
 
-void Timer::Stop()
+void Flip::Timer::Stop()
 {
 	m_IsRunning = false;
 	m_EndTime = std::chrono::high_resolution_clock::now();
 }
 
-double Timer::GetMilliseconds()
+double Flip::Timer::GetMilliseconds()
 {
 	std::chrono::time_point<std::chrono::high_resolution_clock> endtime;
 
@@ -34,7 +34,7 @@ double Timer::GetMilliseconds()
 	return std::chrono::duration<double, std::milli>(endtime - m_StartTime).count();
 }
 
-double Timer::GetSeconds()
+double Flip::Timer::GetSeconds()
 {
 	return GetMilliseconds() / 1000.0;
 }

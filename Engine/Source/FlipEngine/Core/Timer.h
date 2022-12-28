@@ -1,19 +1,22 @@
 #pragma once
 #include <chrono>
 
-class Timer
+namespace Flip
 {
-public:
-	Timer();
-	~Timer() = default;
+	class Timer
+	{
+	public:
+		Timer();
+		~Timer() = default;
 
-	void Start();
-	void Stop();
-	double GetMilliseconds();
-	double GetSeconds();
+		void Start();
+		void Stop();
+		double GetMilliseconds();
+		double GetSeconds();
 
-private:
-	bool m_IsRunning;
-	std::chrono::time_point<std::chrono::high_resolution_clock> m_StartTime;
-	std::chrono::time_point<std::chrono::high_resolution_clock> m_EndTime;
-};
+	private:
+		bool m_IsRunning;
+		std::chrono::time_point<std::chrono::high_resolution_clock> m_StartTime;
+		std::chrono::time_point<std::chrono::high_resolution_clock> m_EndTime;
+	};
+}

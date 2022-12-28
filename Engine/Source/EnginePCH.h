@@ -15,6 +15,8 @@
 #endif
 
 
+// Singletons
+#include "FlipEngine/Core/Logger.h"
 
 // Helping typedefs
 typedef unsigned int uint;

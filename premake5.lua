@@ -14,7 +14,8 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- All the dependency files that we need
 IncludeDir = {}
-IncludeDir["GLFW"] = "Engine/Dependency/GLFW/include"
+IncludeDir["GLFW"] 		= "Engine/Dependency/GLFW/include"
+IncludeDir["spdlog"] 	= "Engine/Dependency/spdlog/include"
 
 -- Includes premake files
 include "Engine/Dependency/GLFW"
@@ -40,7 +41,8 @@ project "Engine"
 	includedirs 
 	{
 		"%{prj.name}/Source/",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.spdlog}"
 	}
 	
 	links
@@ -114,7 +116,8 @@ project "Sandbox"
 	includedirs 
 	{
 		"Engine/Source",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.spdlog}"
 	}
 	
 	links

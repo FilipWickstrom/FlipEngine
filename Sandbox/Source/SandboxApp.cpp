@@ -1,5 +1,6 @@
 #include "SandboxApp.h"
 // #include <iostream>
+#include "FlipEngine/Core/Logger.h"
 
 SandboxApp::SandboxApp(const std::string& nameOfApp)
 	:Application(nameOfApp)
@@ -9,11 +10,13 @@ SandboxApp::SandboxApp(const std::string& nameOfApp)
 void SandboxApp::Init()
 {
 	// Load assets
+	LOG_INFO("Sandbox Initalized");
 }
 
 void SandboxApp::Clean()
 {
 	// Clean up assets and stuff
+	LOG_INFO("Sandbox has been cleaned up");
 }
 
 void SandboxApp::Input()
