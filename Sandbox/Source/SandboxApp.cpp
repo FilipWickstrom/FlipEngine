@@ -1,5 +1,4 @@
 #include "SandboxApp.h"
-// #include <iostream>
 #include "FlipEngine/Core/Logger.h"
 
 SandboxApp::SandboxApp(const std::string& nameOfApp)
@@ -22,6 +21,13 @@ void SandboxApp::Clean()
 void SandboxApp::Input()
 {
 	// What happens if we press "W"?
+
+	/*
+	if (Flip::Keyboard::IsKeypressed(flip::Keyboard::W))
+
+	if (Flip::Mouse::IsKeypressed(flip::Mouse::Left))
+
+	*/
 }
 
 void SandboxApp::Update(double dt)

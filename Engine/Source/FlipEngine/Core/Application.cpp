@@ -17,12 +17,6 @@ void Flip::Application::Run()
 	// Initialize the application with scenes and assets
 	Init();
 
-	LOG_ENGINE_TRACE("Test 1");
-	LOG_ENGINE_INFO("Test 2");
-	LOG_ENGINE_WARN("Test 3");
-	LOG_ENGINE_ERROR("Test 4");
-	LOG_ENGINE_FATAL("Test 5");
-
 	Timer timer;
 	double dt = 0;
 
@@ -31,12 +25,14 @@ void Flip::Application::Run()
 	{
 		// Start timer
 		timer.Start();
+		
+		// Getting window events
+		m_Window.PollEvent();
+
+		// [TODO] Handle Events
 
 		// Handling input
 		Input();
-
-		// Getting window events
-		m_Window.PollEvent();
 
 		// Update code
 		Update(dt);

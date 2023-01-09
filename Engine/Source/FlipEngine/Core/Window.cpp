@@ -21,8 +21,7 @@ bool Flip::Window::Initialize()
 {
 	if (!glfwInit())
 	{
-		// [TODO] Log instead later?
-		std::cout << "GLFW: Init failed..." << std::endl;
+		LOG_ENGINE_ERROR("GLFW: Init failed...");
 		return false;
 	}
 
@@ -59,10 +58,20 @@ bool Flip::Window::Initialize()
 
 	if (!m_Window)
 	{
-		// [TODO]
-		std::cout << "GLFW: Failed to create window..." << std::endl;
+		LOG_ENGINE_ERROR("GLFW: Failed to create window..");
 		return false;
 	}
+
+	LOG_ENGINE_INFO("Created a window '{0}' ({1}x{2})", m_Caption, m_Size.width, m_Size.height);
+
+	/*
+		Initial callback functions for window
+	*/
+	//glfwSetKeyCallback(m_Window, GLFWkeyfun);
+	//glfwSetMouseButtonCallback(m_Window, GLFWmousebuttonfun);
+	//glfwSetScrollCallback(m_Window, GLFWscrollfun);
+	//glfwSetWindowCloseCallback(m_Window, GLFWwindowclosefun);
+	//glfwSetWindowSizeCallback(m_Window, GLFWwindowsizefun);
 
 	return true;
 }
@@ -76,6 +85,17 @@ bool Flip::Window::IsOpen()
 void Flip::Window::PollEvent()
 {
 	glfwPollEvents();
+
+	if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose(m_Window, 1);
+	}
+
+
+	if (glfwGetKey(m_Window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		LOG_ENGINE_INFO("Pressed once W");
+	}
 }
 
 void Flip::Window::EnableVSync(bool toggle)

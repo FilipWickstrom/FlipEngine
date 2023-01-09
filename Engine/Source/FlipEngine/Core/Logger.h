@@ -44,7 +44,7 @@ namespace Flip
 #define LOG_ENGINE_INFO(...)	SPDLOG_LOGGER_INFO(		Flip::Logger::GetEngineLogger(),	__VA_ARGS__) 
 #define LOG_ENGINE_WARN(...)	SPDLOG_LOGGER_WARN(		Flip::Logger::GetEngineLogger(),	__VA_ARGS__) 
 #define LOG_ENGINE_ERROR(...)	SPDLOG_LOGGER_ERROR(	Flip::Logger::GetEngineLogger(),	__VA_ARGS__) 
-#define LOG_ENGINE_FATAL(...)	SPDLOG_LOGGER_CRITICAL(	Flip::Logger::GetEngineLogger(),	__VA_ARGS__) 
+#define LOG_ENGINE_FATAL(...)	SPDLOG_LOGGER_CRITICAL(	Flip::Logger::GetEngineLogger(),	__VA_ARGS__)
 
 #define LOG_TRACE(...)			SPDLOG_LOGGER_TRACE(	Flip::Logger::GetAppLogger(),		__VA_ARGS__)
 #define LOG_INFO(...)			SPDLOG_LOGGER_INFO(		Flip::Logger::GetAppLogger(),		__VA_ARGS__)
@@ -53,7 +53,7 @@ namespace Flip
 #define LOG_FATAL(...)			SPDLOG_LOGGER_CRITICAL(	Flip::Logger::GetAppLogger(),		__VA_ARGS__)
 
 // Destribution build should not use any of the logging
-#ifdef FE_DIST
+#ifdef FLIP_DIST
 	#define LOG_ENGINE_TRACE
 	#define LOG_ENGINE_INFO
 	#define LOG_ENGINE_WARN

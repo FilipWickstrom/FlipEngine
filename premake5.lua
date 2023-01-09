@@ -58,8 +58,8 @@ project "Engine"
 		defines
 		{
 			"GLFW_INCLUDE_NONE",
-			"FE_PLATFORM_WINDOWS",
-			"FE_BUILD_STATIC"
+			"FLIP_WINDOWS",
+			"FLIP_BUILD_STATIC"
 		}
 		
 		links
@@ -82,20 +82,20 @@ project "Engine"
 		defines
 		{
 			"GLFW_INCLUDE_NONE",
-			"FE_PLATFORM_LINUX",
-			"FE_BUILD_STATIC"
+			"FLIP_LINUX",
+			"FLIP_BUILD_STATIC"
 		}
 
 	filter "configurations:Debug"
-		defines "FE_DEBUG"
+		defines "FLIP_DEBUG"
 		symbols "On"
 
 	filter "configurations:Release"
-		defines "FE_RELEASE"
+		defines "FLIP_RELEASE"
 		optimize "On"
 
 	filter "configurations:Dist"
-		defines "FE_DIST"
+		defines "FLIP_DIST"
 		optimize "On"
 
 
@@ -133,7 +133,7 @@ project "Sandbox"
 
 		defines
 		{
-			"FE_PLATFORM_WINDOWS"
+			"FLIP_WINDOWS"
 		}
 
 		postbuildcommands
@@ -149,7 +149,7 @@ project "Sandbox"
 
 		defines
 		{
-			"FE_PLATFORM_LINUX",
+			"FLIP_LINUX",
 			"_X11"
 		}
 		
@@ -161,17 +161,17 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		runtime "Debug"
-		defines "FE_DEBUG"
+		defines "FLIP_DEBUG"
 		symbols "On"
 
 	filter "configurations:Release"
 		runtime "Release"
-		defines "FE_RELEASE"
+		defines "FLIP_RELEASE"
 		optimize "On"
 
 	filter "configurations:Dist"
 		runtime "Release"
-		defines "FE_DIST"
+		defines "FLIP_DIST"
 		optimize "On"
 
 

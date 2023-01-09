@@ -1,2 +1,2 @@
 #include "EnginePCH.h"
-//Nothing more here
+//Needed for Visual Studio, not for gcc and clang.

@@ -1,4 +1,9 @@
 #pragma once
+
+#ifdef FLIP_WINDOWS
+	// Disable warning about APIENTRY in GLFW.h and minwindef.h being redefined
+	#pragma warning( disable : 4005 )
+#endif
 #include <GLFW/glfw3.h>
 #include <string>
 
@@ -29,6 +34,9 @@ namespace Flip
 		//void SetClearColor(vec4);
 
 	private:
+		// Window callback events
+
+
 		void ProcessEvents();
 
 	private:

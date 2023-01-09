@@ -31,7 +31,7 @@ namespace Flip
 		virtual void Clean() = 0;
 		// Setup how input should be handled
 		virtual void Input() = 0;
-		// Update entities
+		// Update the scene with all the entities
 		virtual void Update(double dt) = 0;
 		// Render the models
 		virtual void Render() = 0;
@@ -42,14 +42,7 @@ namespace Flip
 		void Run();
 
 	private:
-		// void Update(); // Specific for the application.
-		// - Update as long as we have not tried to stop the application
-		// - Checking the input
-		// - Checking window specific stuff - resize, not in focus and so on?
-		// - Update the scene if needed.
-
-		// void Render();
-		// - Draw every mesh that we have.
+		
 
 	private:
 
