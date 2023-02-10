@@ -14,9 +14,9 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- All the dependency files that we need
 IncludeDir = {}
-IncludeDir["GLFW"] 		= "Engine/Dependency/GLFW/include"
+IncludeDir["glfw"] 		= "Engine/Dependency/glfw/include"
 IncludeDir["spdlog"] 	= "Engine/Dependency/spdlog/include"
-
+IncludeDir["glm"] 		= "Engine/Dependency/glm/"
 
 
 project "Engine"
@@ -42,13 +42,14 @@ project "Engine"
 	includedirs 
 	{
 		"%{prj.name}/Source/",
-		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.spdlog}"
+		"%{IncludeDir.glfw}",
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
 	{
-		"GLFW"
+		"glfw"
 	}
 
 	filter "system:windows"
@@ -118,14 +119,15 @@ project "Sandbox"
 	includedirs 
 	{
 		"Engine/Source",
-		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.spdlog}"
+		"%{IncludeDir.glfw}",
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.glm}"
 	}
 	
 	links
 	{
 		"Engine",
-		"GLFW"
+		"glfw"
 	}
 
 	filter "system:windows"
