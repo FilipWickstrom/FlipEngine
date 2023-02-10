@@ -18,6 +18,22 @@ void Flip::Timer::Stop()
 	m_EndTime = std::chrono::high_resolution_clock::now();
 }
 
+double Flip::Timer::GetMicroseconds()
+{
+	std::chrono::time_point<std::chrono::high_resolution_clock> endtime;
+
+	if (m_IsRunning)
+	{
+		endtime = std::chrono::high_resolution_clock::now();
+	}
+	else
+	{
+		endtime = m_EndTime;
+	}
+
+	return std::chrono::duration<double, std::micro>(endtime - m_StartTime).count();
+}
+
 double Flip::Timer::GetMilliseconds()
 {
 	std::chrono::time_point<std::chrono::high_resolution_clock> endtime;

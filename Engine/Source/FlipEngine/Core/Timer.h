@@ -11,6 +11,7 @@ namespace Flip
 
 		void Start();
 		void Stop();
+		double GetMicroseconds();
 		double GetMilliseconds();
 		double GetSeconds();
 

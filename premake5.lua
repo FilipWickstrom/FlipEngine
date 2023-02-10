@@ -17,13 +17,14 @@ IncludeDir = {}
 IncludeDir["GLFW"] 		= "Engine/Dependency/GLFW/include"
 IncludeDir["spdlog"] 	= "Engine/Dependency/spdlog/include"
 
--- Includes premake files
-include "Engine/Dependency/GLFW"
+
 
 project "Engine"
-	location "Engine"
-	kind "StaticLib"
-	language "C++"
+	location		"Engine"
+	kind			"StaticLib"
+	language		"C++"
+	staticruntime	"on"
+	systemversion	"latest"
 
 	targetdir("Build/Bin/" .. outputdir .. "/%{prj.name}")
 	objdir("Build/Bin-int/" .. outputdir .. "/%{prj.name}")
@@ -44,7 +45,7 @@ project "Engine"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.spdlog}"
 	}
-	
+
 	links
 	{
 		"GLFW"
@@ -52,8 +53,6 @@ project "Engine"
 
 	filter "system:windows"
 		cppdialect "C++20"
-		staticruntime "On"
-		systemversion "latest"
 
 		defines
 		{
@@ -74,10 +73,8 @@ project "Engine"
 		}
 
 	filter "system:linux"
-		cppdialect "C++2a"
-		staticruntime "On"
-		systemversion "latest"
-		pic "On"
+		cppdialect	"C++2a"
+		pic			"On"
 
 		defines
 		{
@@ -98,11 +95,16 @@ project "Engine"
 		defines "FLIP_DIST"
 		optimize "On"
 
+	-- Solutions for 3rd party libs
+	include "Engine/Dependency/GLFW_premake5"
+
 
 project "Sandbox"
-	location "Sandbox"
-	kind "ConsoleApp"
-	language "C++"
+	location		"Sandbox"
+	kind			"ConsoleApp"
+	language		"C++"
+	staticruntime	"on"
+	systemversion	"latest"
 
 	targetdir("Build/Bin/" .. outputdir .. "/%{prj.name}")
 	objdir("Build/Bin-int/" .. outputdir .. "/%{prj.name}")
@@ -128,8 +130,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++20"
-		staticruntime "On"
-		systemversion "latest"
 
 		defines
 		{
@@ -144,8 +144,6 @@ project "Sandbox"
 
 	filter "system:linux"
 		cppdialect "C++2a"
-		staticruntime "On"
-		systemversion "latest"
 
 		defines
 		{
@@ -173,6 +171,9 @@ project "Sandbox"
 		runtime "Release"
 		defines "FLIP_DIST"
 		optimize "On"
+
+	-- Solutions for 3rd party libs
+	include "Engine/Dependency/GLFW_premake5"
 
 
 -- Cleaning project
