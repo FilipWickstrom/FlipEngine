@@ -11,13 +11,10 @@ A hobby 3D-engine with main focus on Direct3D (11) for now. Here I will learn ne
 # How to download
 You can download it using Git with the command:
 
-> git clone https://github.com/FilipWickstrom/FlipEngine.git
+> git clone --recursive https://github.com/FilipWickstrom/FlipEngine.git
 <!-- 
-    git clone https://github.com/FilipWickstrom/FlipEngine.git --recurse-submodules --remote-submodules 
-    This will download all the 3rd-party libraries that are needed to build the project. 
+    > Download as Zip on GitHub [here](https://github.com/FilipWickstrom/FlipEngine/archive/refs/heads/main.zip)
 -->
-or 
-> Download as Zip on GitHub [here](https://github.com/FilipWickstrom/FlipEngine/archive/refs/heads/main.zip)
 
 # Build project
 1. Go into the folder called "ProjectBuild" and choose platform "Windows" or "Linux".
@@ -25,5 +22,7 @@ or
 3. Open solution for Visual Studio in main directory.
 
 # Libraries and 3rd-parties
-* [GLFW (3.3.8)](https://github.com/glfw/glfw) Creates the window and handle input.
-* [spdlog (1.11.0)](https://github.com/gabime/spdlog) Very fast logging library.
+* [glfw](https://github.com/glfw/glfw) Creates the window and handle input.
+* [spdlog](https://github.com/gabime/spdlog) Very fast logging library.
+* [glm](https://github.com/g-truc/glm) Header only fast math library.
+* [imgui](https://github.com/ocornut/imgui) Debugging GUI
