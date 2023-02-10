@@ -15,7 +15,7 @@
 #if defined(SPDLOG_USE_STD_FORMAT)
 #    include <format>
 #elif defined(SPDLOG_FMT_EXTERNAL)
-#    include <fmt/format.h>
+#    include <fmt/locale.h>
 #else
 #    include "spdlog/fmt/bundled/format.h"
 #endif
