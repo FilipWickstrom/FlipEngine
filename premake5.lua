@@ -16,6 +16,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] 		= "Engine/Dependency/GLFW/include"
 IncludeDir["spdlog"] 	= "Engine/Dependency/spdlog/include"
+IncludeDir["glm"]		= "Engine/Dependency/glm/"
 
 -- Includes premake files
 include "Engine/Dependency/GLFW"
@@ -24,6 +25,7 @@ project "Engine"
 	location "Engine"
 	kind "StaticLib"
 	language "C++"
+	staticruntime "on"
 
 	targetdir("Build/Bin/" .. outputdir .. "/%{prj.name}")
 	objdir("Build/Bin-int/" .. outputdir .. "/%{prj.name}")
@@ -50,9 +52,13 @@ project "Engine"
 		"GLFW"
 	}
 
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
+	}
+
 	filter "system:windows"
 		cppdialect "C++20"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -75,9 +81,8 @@ project "Engine"
 
 	filter "system:linux"
 		cppdialect "C++2a"
-		staticruntime "On"
 		systemversion "latest"
-		pic "On"
+		pic "on"
 
 		defines
 		{
@@ -88,21 +93,22 @@ project "Engine"
 
 	filter "configurations:Debug"
 		defines "FLIP_DEBUG"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "FLIP_RELEASE"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "FLIP_DIST"
-		optimize "On"
+		optimize "on"
 
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "on"
 
 	targetdir("Build/Bin/" .. outputdir .. "/%{prj.name}")
 	objdir("Build/Bin-int/" .. outputdir .. "/%{prj.name}")
@@ -117,7 +123,8 @@ project "Sandbox"
 	{
 		"Engine/Source",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.spdlog}"
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.glm}"
 	}
 	
 	links
@@ -128,7 +135,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++20"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -144,7 +150,6 @@ project "Sandbox"
 
 	filter "system:linux"
 		cppdialect "C++2a"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -162,17 +167,17 @@ project "Sandbox"
 	filter "configurations:Debug"
 		runtime "Debug"
 		defines "FLIP_DEBUG"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		runtime "Release"
 		defines "FLIP_RELEASE"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		runtime "Release"
 		defines "FLIP_DIST"
-		optimize "On"
+		optimize "on"
 
 
 -- Cleaning project

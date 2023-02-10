@@ -9,10 +9,11 @@ namespace Flip
 		Timer();
 		~Timer() = default;
 
-		void Start();
-		void Stop();
-		double GetMilliseconds();
-		double GetSeconds();
+		void	Start();
+		void	Stop();
+		double	GetMicroseconds();
+		double	GetMilliseconds();
+		double	GetSeconds();
 
 	private:
 		bool m_IsRunning;

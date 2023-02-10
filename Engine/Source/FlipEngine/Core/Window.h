@@ -6,6 +6,7 @@
 #endif
 #include <GLFW/glfw3.h>
 #include <string>
+#include "FlipEngine/Math/Vec2.h"
 
 namespace Flip
 {
@@ -44,13 +45,7 @@ namespace Flip
 		bool		m_Fullscreen;
 		bool		m_VSync;
 		std::string m_Caption;
-
-		// [TODO] Later using a vector2 or something simular
-		struct size
-		{
-			int width;
-			int height;
-		} m_Size;
+		Vec2i		m_Size;
 
 	};
 }

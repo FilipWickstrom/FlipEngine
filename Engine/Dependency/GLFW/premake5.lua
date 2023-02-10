@@ -6,6 +6,7 @@
 project "GLFW"
 	kind "StaticLib"
 	language "C"
+	staticruntime "on"
 	
 	targetdir("Build/Bin/" .. outputdir .. "/%{prj.name}")
 	objdir("Build/Bin-int/" .. outputdir .. "/%{prj.name}")
@@ -38,7 +39,6 @@ project "GLFW"
 	}
 	
 	filter "system:windows"
-		staticruntime "On"
 		systemversion "latest"
 		
 		files
@@ -60,7 +60,6 @@ project "GLFW"
 		}
 		
 	filter "system:linux"
-		staticruntime "On"
 		systemversion "latest"
 		pic "On"
 

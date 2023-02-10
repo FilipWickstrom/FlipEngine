@@ -29,8 +29,8 @@ bool Flip::Window::Initialize()
 	GLFWmonitor* primaryMonitor		= glfwGetPrimaryMonitor();
 	const GLFWvidmode* videoMode	= glfwGetVideoMode(primaryMonitor);
 
-	m_Size.height	= videoMode->height;
-	m_Size.width	= videoMode->width;
+	m_Size.x = videoMode->width;
+	m_Size.y = videoMode->height;
 
 	// Should not scale the window content
 	glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_FALSE);
@@ -48,8 +48,8 @@ bool Flip::Window::Initialize()
 
 	m_Window = glfwCreateWindow
 	(
-		m_Size.width,
-		m_Size.height,
+		m_Size.x,
+		m_Size.y,
 		m_Caption.c_str(),
 		fullscreenMonitor,
 		nullptr
@@ -62,7 +62,7 @@ bool Flip::Window::Initialize()
 		return false;
 	}
 
-	LOG_ENGINE_INFO("Created a window '{0}' ({1}x{2})", m_Caption, m_Size.width, m_Size.height);
+	LOG_ENGINE_INFO("Created a window '{0}' ({1}x{2})", m_Caption, m_Size.x, m_Size.y);
 
 	/*
 		Initial callback functions for window
@@ -112,5 +112,8 @@ void Flip::Window::EnableFullscreen(bool toggle)
 void Flip::Window::SetCaption(const std::string& caption)
 {
 	m_Caption = caption;
-	glfwSetWindowTitle(m_Window, m_Caption.c_str());
+	if (m_Window)
+	{
+		glfwSetWindowTitle(m_Window, m_Caption.c_str());
+	}
 }
