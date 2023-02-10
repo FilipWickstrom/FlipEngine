@@ -1,0 +1,9 @@
+[submodule "Engine/Dependency/spdlog"]
+	path = Engine/Dependency/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "Engine/Dependency/glm"]
+	path = Engine/Dependency/glm
+	url = https://github.com/g-truc/glm
+[submodule "Engine/Dependency/glfw"]
+	path = Engine/Dependency/glfw
+	url = https://github.com/glfw/glfw
