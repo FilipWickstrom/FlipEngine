@@ -1,5 +1,5 @@
 # Welcome to FlipEngine
-A hobby 3D-engine with main focus on Direct3D (11) for now. Here I will learn new techniques and programming in general with main focus in 3D-rendering.
+A hobby 3D-engine with main focus on D3D11 and OpenGL. Here I will learn new techniques and programming in general with main focus in 3D-programming.
 
 # Tested platforms
 | OS        | Version   | Compilation using   |
@@ -22,7 +22,8 @@ You can download it using Git with the command:
 3. Open solution for Visual Studio in main directory.
 
 # Libraries and 3rd-parties
-* [glfw](https://github.com/glfw/glfw) Creates the window and handle input.
 * [spdlog](https://github.com/gabime/spdlog) Very fast logging library.
+* [glfw](https://github.com/glfw/glfw) Window creation and handle input.
 * [glm](https://github.com/g-truc/glm) Header only fast math library.
-* [imgui](https://github.com/ocornut/imgui) Debugging GUI
+* [glad](https://glad.dav1d.de/) Modern OpenGL.
+* [imgui](https://github.com/ocornut/imgui) Debugging GUI.
