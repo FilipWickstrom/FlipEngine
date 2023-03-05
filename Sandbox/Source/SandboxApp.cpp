@@ -1,5 +1,5 @@
 #include "SandboxApp.h"
-#include "FlipEngine/Core/Logger.h"
+#include "FlipEngine.h"
 
 SandboxApp::SandboxApp(const std::string& nameOfApp)
 	:Application(nameOfApp)
@@ -28,9 +28,10 @@ void SandboxApp::Input()
 	if (Flip::Mouse::IsKeypressed(flip::Mouse::Left))
 
 	*/
+
 }
 
-void SandboxApp::Update(double dt)
+void SandboxApp::Update(f64 dt)
 {
 	// std::cout << "DT: " << dt << std::endl;
 }

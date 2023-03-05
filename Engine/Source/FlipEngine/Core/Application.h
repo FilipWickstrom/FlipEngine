@@ -1,17 +1,13 @@
 #pragma once
-#include "Window.h"
+#include "FlipEngine/Core/Window.h"
+#include "FlipEngine/Renderer/Renderer.h"
+
+// [TODO] check why PCH is not working correctly...
+typedef double f64;
+#include <memory>
 
 namespace Flip
 {
-	enum class GraphicsAPI
-	{
-		D3D11,
-		//D3D12,		//Maybe far in the future
-		//OPENGL,		//Maybe far in the future
-		//VULKAN,		//Maybe far in the future
-		NR_OF,
-	};
-
 	class Application
 	{
 	public:
@@ -32,7 +28,7 @@ namespace Flip
 		// Setup how input should be handled
 		virtual void Input() = 0;
 		// Update the scene with all the entities
-		virtual void Update(double dt) = 0;
+		virtual void Update(f64 dt) = 0;
 		// Render the models
 		virtual void Render() = 0;
 		// Render imGUI stuff
@@ -45,17 +41,18 @@ namespace Flip
 		
 
 	private:
+		bool m_IsRunning;
 
-		// Handling the surface to draw on.
+
+		// Handling the surface to draw on
+		// and window size and resizing and so on.
 		Window m_Window;
-		// - Handling window size and resizing and so on.
 
 		// InputHandler
 		// - Handling input
 
-		// Renderer
 		// - Closest contact with the Graphics API
-		// 
+		std::unique_ptr<Renderer> m_Renderer;
 
 		// Scenehandler
 		// - Using an ECS with all the components.

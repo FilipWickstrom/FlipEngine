@@ -17,11 +17,12 @@ Flip::Window::~Window()
 	glfwTerminate();
 }
 
-bool Flip::Window::Initialize()
+bool Flip::Window::Init()
 {
 	if (!glfwInit())
 	{
 		LOG_ENGINE_ERROR("GLFW: Init failed...");
+		glfwTerminate();
 		return false;
 	}
 
@@ -35,8 +36,13 @@ bool Flip::Window::Initialize()
 	// Should not scale the window content
 	glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_FALSE);
 
-	// We dont want GLFW to create a context for us.
+	
+	// Deciding if we want GLFW to create a Opengl context for us
+#ifdef FLIP_OPENGL
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
+#else
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+#endif
 
 	// If have chosen fullscreen, we will send 
 	// in the monitor as well in window creation.
@@ -59,6 +65,7 @@ bool Flip::Window::Initialize()
 	if (!m_Window)
 	{
 		LOG_ENGINE_ERROR("GLFW: Failed to create window..");
+		glfwTerminate();
 		return false;
 	}
 
@@ -92,10 +99,10 @@ void Flip::Window::PollEvent()
 	}
 
 
-	if (glfwGetKey(m_Window, GLFW_KEY_W) == GLFW_PRESS)
+	/*if (glfwGetKey(m_Window, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		LOG_ENGINE_INFO("Pressed once W");
-	}
+	}*/
 }
 
 void Flip::Window::EnableVSync(bool toggle)
@@ -113,4 +120,9 @@ void Flip::Window::SetCaption(const std::string& caption)
 {
 	m_Caption = caption;
 	glfwSetWindowTitle(m_Window, m_Caption.c_str());
+}
+
+GLFWwindow* Flip::Window::GetGLFWwindow() const
+{
+	return m_Window;
 }

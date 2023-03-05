@@ -16,7 +16,8 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["glfw"] 		= "Engine/Dependency/glfw/include"
 IncludeDir["spdlog"] 	= "Engine/Dependency/spdlog/include"
-IncludeDir["glm"] 		= "Engine/Dependency/glm/"
+IncludeDir["glm"] 		= "Engine/Dependency/glm"
+IncludeDir["glad"]		= "Engine/Dependency/glad/include"
 
 
 project "Engine"
@@ -44,12 +45,14 @@ project "Engine"
 		"%{prj.name}/Source/",
 		"%{IncludeDir.glfw}",
 		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.glad}"
 	}
 
 	links
 	{
-		"glfw"
+		"glfw",
+		"glad"
 	}
 
 	filter "system:windows"
@@ -57,14 +60,12 @@ project "Engine"
 
 		defines
 		{
-			"GLFW_INCLUDE_NONE",
-			"FLIP_WINDOWS",
 			"FLIP_BUILD_STATIC"
 		}
 		
 		links
 		{
-			"d3d11"
+			--"d3d11"
 		}
 
 		postbuildcommands
@@ -79,8 +80,6 @@ project "Engine"
 
 		defines
 		{
-			"GLFW_INCLUDE_NONE",
-			"FLIP_LINUX",
 			"FLIP_BUILD_STATIC"
 		}
 
@@ -98,6 +97,7 @@ project "Engine"
 
 	-- Solutions for 3rd party libs
 	include "Engine/Dependency/GLFW_premake5"
+	include "Engine/Dependency/glad_premake5"
 
 
 project "Sandbox"
@@ -121,13 +121,15 @@ project "Sandbox"
 		"Engine/Source",
 		"%{IncludeDir.glfw}",
 		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.glad}"
 	}
 	
 	links
 	{
 		"Engine",
-		"glfw"
+		"glfw",
+		"glad",
 	}
 
 	filter "system:windows"
@@ -135,7 +137,6 @@ project "Sandbox"
 
 		defines
 		{
-			"FLIP_WINDOWS"
 		}
 
 		postbuildcommands
@@ -149,7 +150,6 @@ project "Sandbox"
 
 		defines
 		{
-			"FLIP_LINUX",
 			"_X11"
 		}
 		
@@ -176,6 +176,7 @@ project "Sandbox"
 
 	-- Solutions for 3rd party libs
 	include "Engine/Dependency/GLFW_premake5"
+	include "Engine/Dependency/glad_premake5"
 
 
 -- Cleaning project

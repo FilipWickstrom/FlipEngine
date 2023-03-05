@@ -1,19 +1,11 @@
 #pragma once
-#include "EnginePCH.h"
+#include <glm/vec4.hpp>
 
 class Renderer
 {
 public:
-	Renderer();
-	~Renderer();
-
-	Renderer(const Renderer&) = delete;
-	Renderer& operator=(const Renderer&) = delete;
-
-private:
-	ID3D11Device*			m_device;
-	ID3D11DeviceContext*	m_deviceContext;
-	IDXGISwapChain*			m_swapChain;
-	ID3D11RenderTargetView* m_mainRenderTarget;
-
+	virtual bool Init() = 0;
+	virtual void ClearScreen(glm::vec4 color) = 0;
+	virtual void SwapBuffers() = 0;
+	virtual void Draw() = 0;
 };

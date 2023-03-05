@@ -1,11 +1,7 @@
 #pragma once
-
-#ifdef FLIP_WINDOWS
-	// Disable warning about APIENTRY in GLFW.h and minwindef.h being redefined
-	#pragma warning( disable : 4005 )
-#endif
-#include <GLFW/glfw3.h>
 #include <string>
+
+struct GLFWwindow;
 
 namespace Flip
 {
@@ -20,7 +16,7 @@ namespace Flip
 		Window& operator=(const Window&) = delete;
 
 		// Setup the GLFW window
-		bool Initialize();
+		bool Init();
 
 		// Basic - needed in most cases
 		bool IsOpen();
@@ -31,11 +27,11 @@ namespace Flip
 		void EnableVSync(bool toggle = true);
 		void EnableFullscreen(bool toggle = true);
 		void SetCaption(const std::string& caption);
-		//void SetClearColor(vec4);
+
+		GLFWwindow* GetGLFWwindow() const;
 
 	private:
 		// Window callback events
-
 
 		void ProcessEvents();
 
