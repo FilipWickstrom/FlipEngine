@@ -15,13 +15,15 @@ public:
 	virtual void Draw() override;
 
 private:
-	GLFWwindow*								m_WindowHandle;
+	//bool Create
 
-	/*
-	std::unique_ptr<ID3D11Device>			m_Device;
-	std::unique_ptr<ID3D11DeviceContext>	m_DeviceContext;
-	std::unique_ptr<IDXGISwapChain>			m_SwapChain;
-	std::unique_ptr<ID3D11RenderTargetView> m_MainRenderTarget;
-	*/
+private:
+	GLFWwindow*						m_WindowHandle;
+
+	ComPtr<ID3D11Device>			m_Device;
+	ComPtr<ID3D11DeviceContext>		m_DeviceContext;
+	ComPtr<IDXGISwapChain>			m_SwapChain;
+	ComPtr<ID3D11RenderTargetView>	m_MainRenderTarget;
+	
 
 };

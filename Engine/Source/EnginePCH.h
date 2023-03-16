@@ -26,6 +26,14 @@
 
 #elif defined(FLIP_D3D11)
 	#include <d3d11.h>
+	#include <dxgi1_2.h>
+	#include <wrl.h>			// ComPtr
+
+
+	#pragma comment(lib, "d3d11.lib")
+
+	template<typename T>
+	using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 #endif
 
