@@ -18,6 +18,7 @@
 // Third-party compiled libs
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h>
 
 
 // OpenGL-specific
@@ -26,11 +27,13 @@
 
 #elif defined(FLIP_D3D11)
 	#include <d3d11.h>
-	#include <dxgi1_2.h>
+	#include <dxgi1_3.h>
 	#include <wrl.h>			// ComPtr
 
 
 	#pragma comment(lib, "d3d11.lib")
+	#pragma comment(lib, "dxgi.lib")
+
 
 	template<typename T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
