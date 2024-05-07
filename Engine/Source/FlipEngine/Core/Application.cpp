@@ -3,10 +3,10 @@
 #include "Timer.h"
 
 #include "FlipEngine/Platform/Platform.h"
-#ifdef FLIP_OPENGL
-#include "FlipEngine/Platform/OpenGL/OpenGLGraphics.h"
-#elif defined(FLIP_D3D11)
+#if defined(FLIP_D3D11)
 #include "FlipEngine/Platform/D3D11/D3D11Graphics.h"
+#elif defined(FLIP_VULCAN)
+#include "FlipEngine/Platform/Vulcan/VulcanGraphics.h"
 #endif
 
 Flip::Application::Application(const std::string& nameOfApp)
@@ -23,8 +23,8 @@ Flip::Application::Application(const std::string& nameOfApp)
 
 #ifdef FLIP_D3D11
 	m_Renderer = std::make_unique<D3D11Graphics>(m_Window.GetGLFWwindow());
-#else
-	m_Renderer = std::make_unique<OpenGLGraphics>(m_Window.GetGLFWwindow());
+#elif defined FLIP_VULCAN
+	m_Renderer = std::make_unique<VulcanGraphics>(m_Window.GetGLFWwindow());
 #endif
 
 	if (!m_Renderer->Init())

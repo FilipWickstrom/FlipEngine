@@ -22,19 +22,6 @@
 
 #endif
 
-
-
-/*
-	Defines the Graphics API
-*/
-#ifdef FLIP_WINDOWS
-	#define FLIP_D3D11
-#else
-	#define FLIP_OPENGL
-#endif
-
-
-
 /*
 	Include platform specific files
 */
@@ -47,3 +34,9 @@
 	#define GLFW_EXPOSE_NATIVE_WIN32
 
 #endif
+
+/*
+	Defines the Graphics API
+*/
+//#define FLIP_D3D11
+#define FLIP_VULCAN

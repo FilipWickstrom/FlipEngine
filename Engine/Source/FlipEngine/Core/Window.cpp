@@ -1,14 +1,19 @@
 #include "EnginePCH.h"
 #include "Window.h"
 
-Flip::Window::Window()
+namespace Flip
 {
-	m_Fullscreen	= false;
-	m_VSync			= true;
-	m_Caption		= "FlipEngine";
+
+Window::Window()
+	: m_Window(nullptr)
+	, m_Fullscreen(false)
+	, m_VSync(true)
+	, m_Caption("FlipEngine")
+	, m_Size({ 0,0 })
+{
 }
 
-Flip::Window::~Window()
+Window::~Window()
 {
 	// Destroy the window
 	glfwDestroyWindow(m_Window);
@@ -17,7 +22,7 @@ Flip::Window::~Window()
 	glfwTerminate();
 }
 
-bool Flip::Window::Init()
+bool Window::Init()
 {
 	if (!glfwInit())
 	{
@@ -35,14 +40,7 @@ bool Flip::Window::Init()
 
 	// Should not scale the window content
 	glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_FALSE);
-
-	
-	// Deciding if we want GLFW to create a Opengl context for us
-#ifdef FLIP_OPENGL
-	glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
-#else
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-#endif
 
 	// If have chosen fullscreen, we will send 
 	// in the monitor as well in window creation.
@@ -83,13 +81,13 @@ bool Flip::Window::Init()
 	return true;
 }
 
-bool Flip::Window::IsOpen()
+bool Window::IsOpen()
 {
 	// Is keept open as long as we have not sent an close event
 	return !glfwWindowShouldClose(m_Window);
 }
 
-void Flip::Window::PollEvent()
+void Window::PollEvent()
 {
 	glfwPollEvents();
 
@@ -105,24 +103,26 @@ void Flip::Window::PollEvent()
 	}*/
 }
 
-void Flip::Window::EnableVSync(bool toggle)
+void Window::EnableVSync(bool toggle)
 {
 	m_VSync = toggle;
 }
 
-void Flip::Window::EnableFullscreen(bool toggle)
+void Window::EnableFullscreen(bool toggle)
 {
 	m_Fullscreen = toggle;
 	// [TODO] Some GLFW code to update the window
 }
 
-void Flip::Window::SetCaption(const std::string& caption)
+void Window::SetCaption(const std::string& caption)
 {
 	m_Caption = caption;
 	glfwSetWindowTitle(m_Window, m_Caption.c_str());
 }
 
-GLFWwindow* Flip::Window::GetGLFWwindow() const
+GLFWwindow* Window::GetGLFWwindow() const
 {
 	return m_Window;
+}
+
 }

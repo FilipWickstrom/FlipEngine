@@ -17,7 +17,6 @@ IncludeDir = {}
 IncludeDir["glfw"] 		= "Engine/Dependency/glfw/include"
 IncludeDir["spdlog"] 	= "Engine/Dependency/spdlog/include"
 IncludeDir["glm"] 		= "Engine/Dependency/glm"
-IncludeDir["glad"]		= "Engine/Dependency/glad/include"
 
 
 project "Engine"
@@ -45,14 +44,12 @@ project "Engine"
 		"%{prj.name}/Source/",
 		"%{IncludeDir.glfw}",
 		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.glm}",
-		"%{IncludeDir.glad}"
+		"%{IncludeDir.glm}"
 	}
 
 	links
 	{
-		"glfw",
-		"glad"
+		"glfw"
 	}
 
 	filter "system:windows"
@@ -97,7 +94,6 @@ project "Engine"
 
 	-- Solutions for 3rd party libs
 	include "Engine/Dependency/GLFW_premake5"
-	include "Engine/Dependency/glad_premake5"
 
 
 project "Sandbox"
@@ -121,15 +117,13 @@ project "Sandbox"
 		"Engine/Source",
 		"%{IncludeDir.glfw}",
 		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.glm}",
-		"%{IncludeDir.glad}"
+		"%{IncludeDir.glm}"
 	}
 	
 	links
 	{
 		"Engine",
-		"glfw",
-		"glad",
+		"glfw"
 	}
 
 	filter "system:windows"
@@ -176,7 +170,6 @@ project "Sandbox"
 
 	-- Solutions for 3rd party libs
 	include "Engine/Dependency/GLFW_premake5"
-	include "Engine/Dependency/glad_premake5"
 
 
 -- Cleaning project

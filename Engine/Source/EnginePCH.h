@@ -20,10 +20,9 @@
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
 
-
-// OpenGL-specific
-#ifdef FLIP_OPENGL
-	#include <glad/glad.h>
+#ifdef FLIP_VULCAN
+	#define GLFW_INCLUDE_VULCAN
+	//#include <VULCAN>
 
 #elif defined(FLIP_D3D11)
 	#include <d3d11.h>
