@@ -17,6 +17,10 @@ IncludeDir = {}
 IncludeDir["glfw"] 		= "Engine/Dependency/glfw/include"
 IncludeDir["spdlog"] 	= "Engine/Dependency/spdlog/include"
 IncludeDir["glm"] 		= "Engine/Dependency/glm"
+IncludeDir["vulkan"] 	= "$(VULKAN_SDK)/include"
+
+LibraryDir = {}
+LibraryDir["vulkan"] = "$(VULKAN_SDK)/Lib"
 
 
 project "Engine"
@@ -44,7 +48,13 @@ project "Engine"
 		"%{prj.name}/Source/",
 		"%{IncludeDir.glfw}",
 		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.vulkan}"
+	}
+	
+	libdirs 
+	{ 
+		"%{LibraryDir.vulkan}"
 	}
 
 	links
@@ -63,6 +73,7 @@ project "Engine"
 		links
 		{
 			--"d3d11"
+			"vulkan-1"
 		}
 
 		postbuildcommands

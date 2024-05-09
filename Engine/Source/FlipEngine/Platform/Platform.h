@@ -38,5 +38,5 @@
 /*
 	Defines the Graphics API
 */
-//#define FLIP_D3D11
 #define FLIP_VULCAN
+//#define FLIP_D3D11 - Maybe later

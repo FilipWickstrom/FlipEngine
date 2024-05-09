@@ -21,10 +21,10 @@ Flip::Application::Application(const std::string& nameOfApp)
 		LOG_ENGINE_FATAL("Window failed to initialize...");
 	}
 
-#ifdef FLIP_D3D11
-	m_Renderer = std::make_unique<D3D11Graphics>(m_Window.GetGLFWwindow());
-#elif defined FLIP_VULCAN
+#ifdef FLIP_VULCAN
 	m_Renderer = std::make_unique<VulcanGraphics>(m_Window.GetGLFWwindow());
+#elif defined FLIP_D3D11
+	m_Renderer = std::make_unique<D3D11Graphics>(m_Window.GetGLFWwindow());
 #endif
 
 	if (!m_Renderer->Init())

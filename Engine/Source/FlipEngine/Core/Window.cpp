@@ -22,6 +22,26 @@ Window::~Window()
 	glfwTerminate();
 }
 
+
+void GLFWKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if ((key == GLFW_KEY_ESCAPE) && (action == GLFW_PRESS)) 
+	{
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
+	}
+
+	/*if (glfwGetKey(m_Window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		LOG_ENGINE_INFO("Pressed once W");
+	}*/
+}
+
+void GLFWwindowsizeCallback(GLFWwindow* window, int width, int height)
+{
+	// Do something more???
+	LOG_ENGINE_INFO("Resized window to ({0}x{1})", width, height);
+}
+
 bool Window::Init()
 {
 	if (!glfwInit())
@@ -31,9 +51,16 @@ bool Window::Init()
 		return false;
 	}
 
+	if (!glfwVulkanSupported())
+	{
+		LOG_ENGINE_ERROR("GLFW: Vulcan not supported...");
+		glfwTerminate();
+		return false;
+	}
+
 	// Get the primary monitor and check the properties of it
-	GLFWmonitor* primaryMonitor		= glfwGetPrimaryMonitor();
-	const GLFWvidmode* videoMode	= glfwGetVideoMode(primaryMonitor);
+	GLFWmonitor* primaryMonitor	 = glfwGetPrimaryMonitor();
+	const GLFWvidmode* videoMode = glfwGetVideoMode(primaryMonitor);
 
 	m_Size.height	= videoMode->height;
 	m_Size.width	= videoMode->width;
@@ -50,14 +77,11 @@ bool Window::Init()
 		fullscreenMonitor = primaryMonitor;
 	}
 
-	m_Window = glfwCreateWindow
-	(
-		m_Size.width,
-		m_Size.height,
-		m_Caption.c_str(),
-		fullscreenMonitor,
-		nullptr
-	);
+	m_Window = glfwCreateWindow(m_Size.width,
+								m_Size.height,
+								m_Caption.c_str(),
+								fullscreenMonitor,
+								nullptr);
 	
 
 	if (!m_Window)
@@ -72,11 +96,11 @@ bool Window::Init()
 	/*
 		Initial callback functions for window
 	*/
-	//glfwSetKeyCallback(m_Window, GLFWkeyfun);
+	glfwSetKeyCallback(m_Window, GLFWKeyCallback);
+	glfwSetWindowSizeCallback(m_Window, GLFWwindowsizeCallback);
 	//glfwSetMouseButtonCallback(m_Window, GLFWmousebuttonfun);
 	//glfwSetScrollCallback(m_Window, GLFWscrollfun);
 	//glfwSetWindowCloseCallback(m_Window, GLFWwindowclosefun);
-	//glfwSetWindowSizeCallback(m_Window, GLFWwindowsizefun);
 
 	return true;
 }
@@ -91,16 +115,6 @@ void Window::PollEvent()
 {
 	glfwPollEvents();
 
-	if (glfwGetKey(m_Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-	{
-		glfwSetWindowShouldClose(m_Window, 1);
-	}
-
-
-	/*if (glfwGetKey(m_Window, GLFW_KEY_W) == GLFW_PRESS)
-	{
-		LOG_ENGINE_INFO("Pressed once W");
-	}*/
 }
 
 void Window::EnableVSync(bool toggle)

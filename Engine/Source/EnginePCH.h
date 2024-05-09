@@ -22,7 +22,7 @@
 
 #ifdef FLIP_VULCAN
 	#define GLFW_INCLUDE_VULCAN
-	//#include <VULCAN>
+	#include <vulkan/vulkan.h>
 
 #elif defined(FLIP_D3D11)
 	#include <d3d11.h>
